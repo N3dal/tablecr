@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -----------------------------------------------------------------
-#
+# simple script to create tables in cli using ascii characters.
 #
 #
 #
@@ -11,3 +11,22 @@
 # ///
 # ///
 # -----------------------------------------------------------------
+
+
+from os import system
+
+
+def clear():
+    """wipe the terminal."""
+    system("clear")
+
+
+clear()
+
+
+def main():
+    pass
+
+
+if __name__ == "__main__":
+    main()
