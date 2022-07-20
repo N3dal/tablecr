@@ -77,14 +77,16 @@ def create_table_row(data: tuple, max_length: int = None, show_row_bottom_line: 
     header_data = "|" + "|".join(str(title).center(max_length)
                                  for title in data) + "|\n"
 
-    return header_separate_line + header_data + (header_separate_line * bool(bottom_row_line))
+    return header_separate_line + header_data + (header_separate_line * bool(show_row_bottom_line))
 
 
 def main():
 
     header_titles = "N", "Sample", 3, "HR", "FA", "EXP"
-    print(create_table_cells(header_titles, bottom_row_line=0), end="")
-    print(create_table_cells(header_titles), end="")
+    header_titles1 = "1", "2", 4, "23", "222", "3213"
+
+    print(create_table_row(header_titles, show_row_bottom_line=0), end="")
+    print(create_table_row(header_titles1), end="")
 
 
 if __name__ == "__main__":
