@@ -59,7 +59,7 @@ def find_max_length(data: tuple):
     return len(max_string)
 
 
-def create_table_header(header_titles: tuple, max_length: int = None):
+def create_table_cells(header_titles: tuple, max_length: int = None):
     """create a cli table using ascii characters."""
 
     COLUMNS = len(header_titles)
@@ -73,25 +73,17 @@ def create_table_header(header_titles: tuple, max_length: int = None):
                   SPACE_VALUE) if not max_length else max_length
 
     header_separate_line = ("+" + "-"*max_length) * COLUMNS + "+\n"
+
     header_data = "|" + "|".join(str(title).center(max_length)
                                  for title in header_titles) + "|\n"
 
     return header_separate_line + header_data + header_separate_line
 
 
-def create_table_data_cells(data: tuple, header_titles: tuple):
-    """"""
-
-    # we will use header_titles to calc the columns count,
-    COLUMNS = len(header_titles)
-
-    data_separate_line = ("+" + "-"*max_length) * COLUMNS + "+\n"
-
-
 def main():
 
     header_titles = "N", "Sample", 3, "HR", "FA", "EXP"
-    print(create_table_header(header_titles), end="")
+    print(create_table_cells(header_titles), end="")
 
 
 if __name__ == "__main__":
