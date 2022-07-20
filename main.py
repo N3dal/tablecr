@@ -59,7 +59,7 @@ def find_max_length(data: tuple):
     return len(max_string)
 
 
-def create_table_row(data: tuple, max_length: int = None, show_row_bottom_line: bool = True):
+def create_table_row(data: tuple, max_length: int = None, show_row_bottom_line: bool = True, header_row: bool = False):
     """create one row for the table."""
     COLUMNS = len(data)
 
@@ -68,12 +68,17 @@ def create_table_row(data: tuple, max_length: int = None, show_row_bottom_line: 
     # and remember to add shifting/space value to get some space.
     SPACE_VALUE = 4
 
-    header_separate_line = ("+" + "-"*max_length) * COLUMNS + "+\n"
+    row_separate_line = ("+" + "-"*max_length) * COLUMNS + "+\n"
 
-    header_data = "|" + "|".join(str(title).center(max_length)
-                                 for title in data) + "|\n"
+    header_separate_line = ("=" + "="*max_length) * COLUMNS + "+\n"
 
-    return header_separate_line + header_data + (header_separate_line * bool(show_row_bottom_line))
+    row_data = "|" + "|".join(str(title).center(max_length)
+                              for title in data) + "|\n"
+
+    if header_row:
+        return header_separate_line + row_data + (header_separate_line * bool(show_row_bottom_line))
+
+    return row_separate_line + row_data + (row_separate_line * bool(show_row_bottom_line))
 
 
 def create_table(data: tuple, max_length: int = None):
@@ -94,14 +99,14 @@ def create_table(data: tuple, max_length: int = None):
 
     for index, row in enumerate(data):
         print(create_table_row(row, max_length,
-              show_row_bottom_line=(index == last_row)), end='')
+              show_row_bottom_line=(index == last_row), header_row=(index == 1)), end='')
 
     return None
 
 
 def main():
 
-    header_titles = "N", "Sample", 3, "HR", "FA", "EXP", "fin"
+    header_titles = "N", "Sample", 3, "HR", "FA", "EXP"
     header_titles1 = "1", "2", 4, "23", "222", "3213"
     header_titles2 = "2", "3", 5, "1", "113", "234"
     header_titles3 = "3", "4", 8, "43", "555", "66"
