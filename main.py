@@ -59,7 +59,7 @@ def find_max_length(data: tuple):
     return len(max_string)
 
 
-def create_table_row(data: tuple, max_length: int = None, bottom_row_line: bool = True):
+def create_table_row(data: tuple, max_length: int = None, show_row_bottom_line: bool = True):
     """create a cli table using ascii characters."""
 
     COLUMNS = len(data)
