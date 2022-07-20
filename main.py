@@ -24,12 +24,16 @@ def clear():
     """wipe the terminal."""
 
     if os_name == "posix":
-        # *nix machines.
+        # for *nix machines.
         system("clear")
 
-    else:
-        # windows machines.
+    elif os_name == "windows":
         system("cls")
+
+    else:
+        # for all other system in the world.
+        # system("your-command.")
+        pass
 
 
 clear()
@@ -65,8 +69,6 @@ def create_table_data_cells(data: tuple, header_titles: tuple):
     COLUMNS = len(header_titles)
 
     data_separate_line = ("+" + "-"*MAX_LENGTH) * COLUMNS + "+\n"
-
-    
 
 
 def main():
