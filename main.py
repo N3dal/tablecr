@@ -59,30 +59,31 @@ def find_max_length(data: tuple):
     return len(max_string)
 
 
-def create_table_cells(header_titles: tuple, max_length: int = None):
+def create_table_row(data: tuple, max_length: int = None, bottom_row_line: bool = True):
     """create a cli table using ascii characters."""
 
-    COLUMNS = len(header_titles)
+    COLUMNS = len(data)
 
     # now will find the word that have the max length of characters.
     # we will use the max length to center all the header titles strings.
     # and remember to add shifting/space value to get some space.
     SPACE_VALUE = 4
 
-    max_length = (find_max_length(header_titles) +
+    max_length = (find_max_length(data) +
                   SPACE_VALUE) if not max_length else max_length
 
     header_separate_line = ("+" + "-"*max_length) * COLUMNS + "+\n"
 
     header_data = "|" + "|".join(str(title).center(max_length)
-                                 for title in header_titles) + "|\n"
+                                 for title in data) + "|\n"
 
-    return header_separate_line + header_data + header_separate_line
+    return header_separate_line + header_data + (header_separate_line * bool(bottom_row_line))
 
 
 def main():
 
     header_titles = "N", "Sample", 3, "HR", "FA", "EXP"
+    print(create_table_cells(header_titles, bottom_row_line=0), end="")
     print(create_table_cells(header_titles), end="")
 
 
