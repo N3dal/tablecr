@@ -36,11 +36,27 @@ def clear():
         pass
 
 
-clear()
+# clear()
 
 # we only use those chars to build the table.
-# '+', '-', '|', '=', and we can use nice,
-# unicode chars like that i use in xo game.
+# '+', '-', '|', '=', and we can use Special,
+# Uni-code characters but this can make some bugs,
+# Especially for windows machines.
+
+
+def find_max_length(data: tuple):
+    """find the max string length in given data,
+    and return the max length as int.
+    in wrong cases return '-1' as int."""
+
+    # Guard conditions.
+    if not data:
+        # empty case.
+        return -1
+
+    max_string = max(data, key=lambda a: len(str(a)))
+
+    return len(max_string)
 
 
 def create_table_header(header_titles: tuple, max_length: int = None):
@@ -50,13 +66,14 @@ def create_table_header(header_titles: tuple, max_length: int = None):
 
     # now will find the word that have the max length of characters.
     # we will use the max length to center all the header titles strings.
-    # and remember to add shifthing/space value to get some space.
+    # and remember to add shifting/space value to get some space.
     SPACE_VALUE = 4
-    MAX_LENGTH = (len(max(header_titles, key=lambda a: len(str(a)))) +
+
+    max_length = (find_max_length(header_titles) +
                   SPACE_VALUE) if not max_length else max_length
 
-    header_separate_line = ("+" + "-"*MAX_LENGTH) * COLUMNS + "+\n"
-    header_data = "|" + "|".join(str(title).center(MAX_LENGTH)
+    header_separate_line = ("+" + "-"*max_length) * COLUMNS + "+\n"
+    header_data = "|" + "|".join(str(title).center(max_length)
                                  for title in header_titles) + "|\n"
 
     return header_separate_line + header_data + header_separate_line
@@ -68,7 +85,7 @@ def create_table_data_cells(data: tuple, header_titles: tuple):
     # we will use header_titles to calc the columns count,
     COLUMNS = len(header_titles)
 
-    data_separate_line = ("+" + "-"*MAX_LENGTH) * COLUMNS + "+\n"
+    data_separate_line = ("+" + "-"*max_length) * COLUMNS + "+\n"
 
 
 def main():
