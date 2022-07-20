@@ -12,6 +12,9 @@
 # ///
 # -----------------------------------------------------------------
 
+# todo:
+# update this piece of shit.
+
 
 from os import system
 from os import name as os_name
@@ -36,34 +39,39 @@ clear()
 # unicode chars like that i use in xo game.
 
 
-def create_table_header(header_titles: tuple, rows: int = 0, columns: int = None, max_length: int = None):
+def create_table_header(header_titles: tuple, max_length: int = None):
     """create a cli table using ascii characters."""
 
-    # by default  the columns number will be the numbers,
-    # of the header titles, if the columns was None.
-    columns = len(header_titles) if not columns else columns
+    COLUMNS = len(header_titles)
 
     # now will find the word that have the max length of characters.
     # we will use the max length to center all the header titles strings.
     # and remember to add shifthing/space value to get some space.
     SPACE_VALUE = 4
-    MAX_LENGTH = (len(max(header_titles, key=len)) +
+    MAX_LENGTH = (len(max(header_titles, key=lambda a: len(str(a)))) +
                   SPACE_VALUE) if not max_length else max_length
 
-    header_separate_line = ("+" + "-"*MAX_LENGTH) * columns + "+\n"
-    header_data = "|" + "|".join(title.center(MAX_LENGTH)
+    header_separate_line = ("+" + "-"*MAX_LENGTH) * COLUMNS + "+\n"
+    header_data = "|" + "|".join(str(title).center(MAX_LENGTH)
                                  for title in header_titles) + "|\n"
 
     return header_separate_line + header_data + header_separate_line
 
 
-def create_table_data_cells():
+def create_table_data_cells(data: tuple, header_titles: tuple):
     """"""
+
+    # we will use header_titles to calc the columns count,
+    COLUMNS = len(header_titles)
+
+    data_separate_line = ("+" + "-"*MAX_LENGTH) * COLUMNS + "+\n"
+
+    
 
 
 def main():
 
-    header_titles = "N", "Sample", "ST-Thr", "HR", "FA", "EXP"
+    header_titles = "N", "Sample", 3, "HR", "FA", "EXP"
     print(create_table_header(header_titles), end="")
 
 
