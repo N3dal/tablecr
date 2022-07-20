@@ -60,17 +60,13 @@ def find_max_length(data: tuple):
 
 
 def create_table_row(data: tuple, max_length: int = None, show_row_bottom_line: bool = True):
-    """create a cli table using ascii characters."""
-
+    """create one row for the table."""
     COLUMNS = len(data)
 
     # now will find the word that have the max length of characters.
     # we will use the max length to center all the header titles strings.
     # and remember to add shifting/space value to get some space.
     SPACE_VALUE = 4
-
-    max_length = (find_max_length(data) +
-                  SPACE_VALUE) if not max_length else max_length
 
     header_separate_line = ("+" + "-"*max_length) * COLUMNS + "+\n"
 
@@ -80,13 +76,39 @@ def create_table_row(data: tuple, max_length: int = None, show_row_bottom_line: 
     return header_separate_line + header_data + (header_separate_line * bool(show_row_bottom_line))
 
 
+def create_table(data: tuple, max_length: int = None):
+    """create a cli table using ascii characters."""
+
+    SPACE_VALUE = 4
+    optimal_max_length = (find_max_length(data) + SPACE_VALUE)
+
+    # guard conditions.
+    if not max_length:
+        # case is empty.
+        max_length = optimal_max_length
+
+    if max_length < optimal_max_length:
+        max_length = optimal_max_length
+
+    last_row = len(data) - 1
+
+    for index, row in enumerate(data):
+        print(create_table_row(row, max_length,
+              show_row_bottom_line=(index == last_row)), end='')
+
+    return None
+
+
 def main():
 
-    header_titles = "N", "Sample", 3, "HR", "FA", "EXP"
+    header_titles = "N", "Sample", 3, "HR", "FA", "EXP", "fin"
     header_titles1 = "1", "2", 4, "23", "222", "3213"
+    header_titles2 = "2", "3", 5, "1", "113", "234"
+    header_titles3 = "3", "4", 8, "43", "555", "66"
 
-    print(create_table_row(header_titles, show_row_bottom_line=0), end="")
-    print(create_table_row(header_titles1), end="")
+    t = (header_titles, header_titles1, header_titles2, header_titles3)
+
+    create_table(t)
 
 
 if __name__ == "__main__":
