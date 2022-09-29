@@ -14,10 +14,14 @@
 
 # todo:
 # update this piece of shit.
+# make the paradiam OOP, create table object or you can say class.
 
-
-from os import system
 from os import name as os_name
+from os import system
+
+
+class Table:
+    """TODO: complete this blueprint"""
 
 
 def clear():
