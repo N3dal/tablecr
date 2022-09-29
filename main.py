@@ -16,31 +16,13 @@
 # update this piece of shit.
 # make the paradiam OOP, create table object or you can say class.
 
-from os import name as os_name
-from os import system
+
+from tools import Tools
 
 
-class Table:
-    """TODO: complete this blueprint"""
+# wipe the terminal screen;
+Tools.clear()
 
-
-def clear():
-    """wipe the terminal."""
-
-    if os_name == "posix":
-        # for *nix machines.
-        system("clear")
-
-    elif os_name == "windows":
-        system("cls")
-
-    else:
-        # for all other system in the world.
-        # system("your-command.")
-        pass
-
-
-# clear()
 
 # we only use those chars to build the table.
 # '+', '-', '|', '=', and we can use Special,
