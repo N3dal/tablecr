@@ -3,6 +3,7 @@
 Docs;
 
 """
+__version__ = 1.0
 
 
 class Table:
@@ -27,6 +28,9 @@ class Table:
         defaults for the remain ones for ex:
             passing "&X" => this will convert to "&X+="
 
+        if you pass an empty string that will cause to use the,
+        default draw_elements.
+
     special_header_line:bool
         using this option/flag you can draw the header line with,
         the Special-Horizontal-Line draw element that you pass, or
@@ -38,20 +42,32 @@ class Table:
 
     """
 
-    def __init__(self, draw_elements="-|+=", special_header_line=False):
+    # by the default we only ue those chars to build the table:
+    #   ('+', '-', '|', '=')
+    # and we can use some Special Uni-Code characters but this can make,
+    # some bugs Especially for windows machines.
+    __DEFAULT_DRAW_ELEMENTS = "-|+="
+
+    def __init__(self, draw_elements=__DEFAULT_DRAW_ELEMENTS, special_header_line=False):
+
+        self.draw_elements = draw_elements
+        self.special_header_line = special_header_line
 
         # guard conditions
         assert isinstance(
             draw_elements, str), f"{draw_elements} is {type(draw_elements)} only {str} is allowed "
 
-        # by the default we only ue those chars to build the table:
-        #   ('+', '-', '|', '=')
-        # and we can use some Special Uni-Code characters but this can make,
-        # some bugs Especially for windows machines.
+        __draw_elements_len = len(draw_elements)
+        if __draw_elements_len < 4:
+            # even if the user pass an empty string this will use the default ones.
+            self.draw_elements += Table.__DEFAULT_DRAW_ELEMENTS[__draw_elements_len:]
 
-        self.draw_elements = "-|+="
-
-        pass
+        self.horizontal_line, self.vertical_line, self.cross_point, self.special_header_horizontal_line = self.draw_elements
 
 
-t = Table(draw_elements="234")
+t = Table(draw_elements="ABT*")
+
+print(t.horizontal_line)
+print(t.vertical_line)
+print(t.cross_point)
+print(t.special_header_horizontal_line)
