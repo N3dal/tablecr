@@ -9,6 +9,9 @@ from os import system
 
 class Tools:
     """"""
+
+    MACHINE_OS_NAME = OS_NAME
+
     @staticmethod
     def clear():
         """wipe the terminal screen."""
