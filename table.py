@@ -85,7 +85,14 @@ class Table:
             self.__horizontal_line, self.__vertical_line, self.__cross_point, self.__special_header_horizontal_line = Table.__DEFAULT_DRAW_ELEMENTS.split()
         else:
             # for mac and linux machines;
-            pass
+            self.__top_left_corner, self.__horizontal_line, self.__t_cross, self.__top_right_corner,\
+                self.__vertical_line, self.__cross_point, self.__flipped_t_cross, self.__bottom_left_corner,\
+                self.__bottom_right_corner, self.__right_side_cross, self.__left_side_cross = Table.__LINUX_DRAW_ELEMENTS.split()
+
+    def show(self):
+        """print the table on the terminal"""
+
+        return None
 
 
-t = Table()
+t = Table(draw_element="MAC")
