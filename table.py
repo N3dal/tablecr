@@ -73,7 +73,7 @@ class Table:
 
         self.special_header_line = special_header_line
 
-        print(draw_element)
+        self.__table_header = []
 
         # guard conditions
         assert isinstance(
@@ -94,5 +94,21 @@ class Table:
 
         return None
 
+    def show_table_header(self):
+        """show the table header values"""
+
+        return self.__table_header
+
+    def __setitem__(self, key, value):
+        """set self[key] to value"""
+
+        if key == "header":
+            self.__table_header.extend(value)
+
+        return None
+
 
 t = Table(draw_element="MAC")
+t["header"] = ["title", "fine", "three"]
+
+print(t.show_table_header())
