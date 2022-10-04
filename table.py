@@ -101,6 +101,8 @@ class Table:
         # will fit good;
         longest_header_string_length = len(max(self.__table_header, key=len))
 
+        headers_count = len(self.__table_header)
+
         # and make sure that our header strings don't go over the max_string_len
         if longest_header_string_length > max_string_len:
             longest_header_string_length = 20
@@ -112,22 +114,36 @@ class Table:
             # window machines;
 
             # first draw the upper line;
-            upper_line = self.__cross_point + self.__horizontal_line * \
-                longest_header_string_length + self.__horizontal_line * SPACING + self.__cross_point
+            upper_line = self.__cross_point + \
+                f"{self.__cross_point}".join(
+                    (self.__horizontal_line *
+                     longest_header_string_length + self.__horizontal_line * SPACING)
+                    for _ in range(headers_count)
+                ) + self.__cross_point
 
             if self.special_header_line:
                 # in case we want to use special char to draw the header line;
                 self.__horizontal_line = self.__special_header_horizontal_line
 
-            bottom_line = self.__cross_point + self.__horizontal_line * \
-                longest_header_string_length + self.__horizontal_line * SPACING + self.__cross_point
+            mid_line = self.__vertical_line + f"{self.__vertical_line}".join(
+                header.center(longest_header_string_length+SPACING) for header in self.__table_header) + self.__vertical_line
+
+            bottom_line = self.__cross_point + \
+                f"{self.__cross_point}".join(
+                    (self.__horizontal_line *
+                     longest_header_string_length + self.__horizontal_line * SPACING)
+                    for _ in range(headers_count)
+                ) + self.__cross_point
 
             print(upper_line)
+            print(mid_line)
             print(bottom_line)
 
         else:
             # linux machines;
             pass
+
+        return None
 
     def show(self):
         """print the table on the terminal"""
@@ -152,4 +168,4 @@ t = Table(draw_element="WIN", special_header_line=1)
 t["header"] = ["title", "fine", "three", ]
 t.show()
 
-print(t.show_table_header())
+# print(t.show_table_header())
