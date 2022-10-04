@@ -73,15 +73,17 @@ class Table:
 
         self.special_header_line = special_header_line
 
+        self.draw_element = draw_element
+
         self.__table_header = []
 
         # guard conditions
         assert isinstance(
-            draw_element, str), f"{draw_element} is {type(draw_element)} only {str} is allowed "
+            self.draw_element, str), f"{self.draw_element} is {type(self.draw_element)} only {str} is allowed "
 
-        assert draw_element in Table.__DRAW_ELEMENTS_OPTIONS, f"draw_element can only be one of {Table.__DRAW_ELEMENTS_OPTIONS}"
+        assert self.draw_element in Table.__DRAW_ELEMENTS_OPTIONS, f"draw_element can only be one of {Table.__DRAW_ELEMENTS_OPTIONS}"
 
-        if draw_element == "WIN":
+        if self.draw_element == "WIN":
             self.__horizontal_line, self.__vertical_line, self.__cross_point, self.__special_header_horizontal_line = Table.__DEFAULT_DRAW_ELEMENTS.split()
         else:
             # for mac and linux machines;
@@ -91,6 +93,10 @@ class Table:
 
     def show(self):
         """print the table on the terminal"""
+
+        if self.special_header_line:
+            # in case we want to use special char to draw the header line;
+            pass
 
         return None
 
