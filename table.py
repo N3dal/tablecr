@@ -164,8 +164,8 @@ class Table:
         return None
 
 
-t = Table(draw_element="WIN", special_header_line=1)
-t["header"] = ["title", "fine", "three", ]
+t = Table(draw_element="WIN", special_header_line=0)
+t["header"] = ["count", "frequency", "item-name", "value", "price", "role"]
 t.show()
 
 # print(t.show_table_header())
