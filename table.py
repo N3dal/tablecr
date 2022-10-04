@@ -91,12 +91,24 @@ class Table:
                 self.__vertical_line, self.__cross_point, self.__flipped_t_cross, self.__bottom_left_corner,\
                 self.__bottom_right_corner, self.__right_side_cross, self.__left_side_cross = Table.__LINUX_DRAW_ELEMENTS.split()
 
+    def __draw_header(self):
+        """
+        draw the table header on the terminal screen;
+        """
+
+        if self.draw_element == "WIN":
+            # window machines;
+
+            if self.special_header_line:
+                # in case we want to use special char to draw the header line;
+                pass
+
+        else:
+            # linux machines;
+            pass
+
     def show(self):
         """print the table on the terminal"""
-
-        if self.special_header_line:
-            # in case we want to use special char to draw the header line;
-            pass
 
         return None
 
@@ -116,5 +128,6 @@ class Table:
 
 t = Table(draw_element="MAC")
 t["header"] = ["title", "fine", "three"]
+t.show()
 
 print(t.show_table_header())
