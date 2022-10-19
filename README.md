@@ -3,7 +3,7 @@
 <img src="./src/logo.gif" />
 </br>
 the simplest way to build terminal tables
-
+</br>
 </p>
 
 `tablecr` is just a tool to create tables on your terminal,
