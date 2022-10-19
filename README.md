@@ -1,7 +1,9 @@
 <p align="center">
 
+<img src="./src/logo.gif" />
 
 </br>
+
 the simplest way to build terminal tables
 
 </p>
