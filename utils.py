@@ -7,25 +7,19 @@ from os import name as OS_NAME
 from os import system
 
 
-class Tools:
-    """"""
+def clear():
+    """wipe the terminal screen."""
 
-    MACHINE_OS_NAME = OS_NAME
+    if OS_NAME == "posix":
+        # for *nix machines.
+        system("clear")
 
-    @staticmethod
-    def clear():
-        """wipe the terminal screen."""
+    elif OS_NAME == "windows":
+        system("cls")
 
-        if os_name == "posix":
-            # for *nix machines.
-            system("clear")
+    else:
+        # for all other system in the world.
+        # system("your-command.")
+        pass
 
-        elif os_name == "windows":
-            system("cls")
-
-        else:
-            # for all other system in the world.
-            # system("your-command.")
-            pass
-
-        return None
+    return None
